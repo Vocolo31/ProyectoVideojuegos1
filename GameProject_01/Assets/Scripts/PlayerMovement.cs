@@ -16,6 +16,8 @@ public class NewBehaviourScript : MonoBehaviour
     public bool isGrounded;
     public bool isCrouched;
     public float x;
+    public LayerMask ground;
+    public float longitudRaycast;
 
     private Vector3 initialPosition;
     private Vector3 initialScale;
@@ -52,11 +54,16 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {
         x = Input.GetAxis("Horizontal");
+        
+        Grounded();
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
+
+        
+
 
         rb.velocity = new Vector2(x * playerSpeed, rb.velocity.y);
 
@@ -74,20 +81,21 @@ public class NewBehaviourScript : MonoBehaviour
         transform.localScale = initialScale;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnDrawGizmos()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        //color del raycast
+        Gizmos.color = Color.red;
+
+        // posicion del raycast y direccion del mismo
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * longitudRaycast);
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    public void Grounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
+        // Raycast hacia el suelo 
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, longitudRaycast, ground);
+
+        isGrounded = hit.collider != null;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -98,21 +106,6 @@ public class NewBehaviourScript : MonoBehaviour
             DeathCounter++;
             //TriesCounter();
             playerSpeed = startSpeed;
-        }
-
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            Crouch();
-            
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
         }
     }
 
@@ -178,14 +171,16 @@ public class NewBehaviourScript : MonoBehaviour
                 animator.SetBool("Crawled", true);
                 boxCollider.enabled = true;
                 polygonCollider.enabled = false;
+                Debug.Log("Agachado 1");
             }
         }
-        else if (IsCrouched) // Solo cambia si estaba agachado
+        else if (IsCrouched)
         {
             IsCrouched = false;
             animator.SetBool("Crawled", false);
             boxCollider.enabled = false;
             polygonCollider.enabled = true;
+            Debug.Log("Agachado 2");
         }
     }
 
