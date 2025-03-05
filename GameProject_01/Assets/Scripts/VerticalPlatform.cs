@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,15 @@ using UnityEngine;
 public class VerticalPlatform : MonoBehaviour
 {
     private PlatformEffector2D effector;
-    public float waitTime = 0.5f;
+    public float waitTime;
     public float activeTime = 2f;
     public float Timer = 0f;
+    private float startingWaitTime;
 
     private void Start()
     {
         effector = GetComponent<PlatformEffector2D>();
+        startingWaitTime = waitTime;
     }
 
     private void Update()
@@ -23,7 +26,7 @@ public class VerticalPlatform : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.S))
         {
-            waitTime = 0.2f;
+            waitTime = startingWaitTime;
             effector.rotationalOffset = 0f;
         }
 
@@ -32,7 +35,7 @@ public class VerticalPlatform : MonoBehaviour
             if (waitTime <= 0)
             {
                 effector.rotationalOffset = 180f;
-                waitTime = 0.2f;
+                waitTime = startingWaitTime;
                 Timer = activeTime;
 
             }

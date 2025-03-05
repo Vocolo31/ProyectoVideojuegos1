@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed;
     public float startSpeed;
@@ -19,8 +19,8 @@ public class NewBehaviourScript : MonoBehaviour
     public LayerMask ground;
     public float longitudRaycast;
 
-    private Vector3 initialPosition;
-    private Vector3 initialScale;
+    public Vector3 initialPosition;
+    public Vector3 initialScale;
 
     public int DeathCounter;
     public TextMeshProUGUI TriesText;
@@ -33,6 +33,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Animator animator;
     public BoxCollider2D boxCollider;
     public PolygonCollider2D polygonCollider;
+    public Spikes spikes;
 
 
     // Start is called before the first frame update
@@ -98,7 +99,7 @@ public class NewBehaviourScript : MonoBehaviour
         isGrounded = hit.collider != null;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    /*void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Void"))
         {
@@ -123,7 +124,7 @@ public class NewBehaviourScript : MonoBehaviour
     void HeavyDrop()
     {
         
-        if (!isGrounded && Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             rb.gravityScale = startingGravity * 3;
             if (!IsCrouched)
