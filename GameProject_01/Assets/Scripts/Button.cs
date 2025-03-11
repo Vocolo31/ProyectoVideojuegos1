@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Button : MonoBehaviour
@@ -7,6 +8,7 @@ public class Button : MonoBehaviour
     public PlayerMovement playerMovement;
     public Spikes spikes;
     public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,7 @@ public class Button : MonoBehaviour
     {
         spikes.close();
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(0.5f);
 
         spikes.open();
     }
