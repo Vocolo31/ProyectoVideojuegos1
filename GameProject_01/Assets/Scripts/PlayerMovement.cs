@@ -130,6 +130,8 @@ public class PlayerMovement : MonoBehaviour
             if (!IsCrouched)
             {
                 animator.SetBool("Crawled", true);
+                boxCollider.enabled = true;
+                polygonCollider.enabled = false;
             }
         }
 
@@ -139,6 +141,8 @@ public class PlayerMovement : MonoBehaviour
             if (!IsCrouched)
             {
                 animator.SetBool("Crawled", false);
+                boxCollider.enabled = false;
+                polygonCollider.enabled = true;
             }
         }
 
