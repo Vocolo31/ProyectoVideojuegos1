@@ -54,25 +54,45 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
         
         Grounded();
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (isGrounded) 
         {
-            Jump();
+            animator.SetBool("Jumping", false);
         }
 
-        
-
-
-        rb.velocity = new Vector2(x * playerSpeed, rb.velocity.y);
+        Movement();
 
 
         Crouch();
         HeavyDrop();
         Run();
         //JumpBoost();
+    }
+
+    public void Movement() 
+    {
+        x = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            Jump();
+            animator.SetBool("Jumping", true);
+        }
+
+        if (rb.velocity.x < 0) 
+        {
+            transform.localScale = new Vector2(-1,1);
+        }
+
+        else if (rb.velocity.x > 0)
+        {
+            transform.localScale = new Vector2(1, 1);
+        }
+
+            rb.velocity = new Vector2(x * playerSpeed, rb.velocity.y);
+
+        animator.SetFloat("X Velocity", rb.velocity.x);
     }
     
     public void Jump()

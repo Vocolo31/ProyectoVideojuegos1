@@ -5,17 +5,24 @@ using UnityEngine;
 public class Parallax : MonoBehaviour
 {
     [SerializeField] private Vector2 velocidadMovimiento;
+    [SerializeField] private float multiplicadorVelocidad = 0.1f;
     private Vector2 offset;
     private Material material;
-    private Rigidbody2D jugadorRB;
+    private Transform jugadorTransform;
+    private Vector2 ultimaPosicion;
     private void Awake()
     {
         material = GetComponent<SpriteRenderer>().material;
-        jugadorRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        jugadorTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        ultimaPosicion = jugadorTransform.position;
     }
     private void Update()
     {
-        offset = (jugadorRB.velocity.x * 0.1f) * velocidadMovimiento * Time.deltaTime;
-        material.mainTextureOffset += offset;
+        Vector2 posicionActual = jugadorTransform.position;
+        Vector2 desplazamiento = (posicionActual - ultimaPosicion) * velocidadMovimiento;
+
+        material.mainTextureOffset += desplazamiento;
+
+        ultimaPosicion = posicionActual;
     }
 }
