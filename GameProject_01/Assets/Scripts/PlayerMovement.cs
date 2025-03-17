@@ -35,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
     public PolygonCollider2D polygonCollider;
     public Spikes spikes;
 
+    public int yellowCoinNumber;
+    public TextMeshProUGUI yellowCoinText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         polygonCollider = GetComponent<PolygonCollider2D>();
+        //CoinCounter();
     }
 
     // Update is called once per frame
@@ -69,6 +73,23 @@ public class PlayerMovement : MonoBehaviour
         Run();
         //JumpBoost();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+
+            yellowCoinNumber++;
+
+            //CoinCounter();
+        }
+    }
+
+    /*void CoinCounter()
+    {
+        yellowCoinText.text = yellowCoinNumber.ToString();
+    }*/
 
     public void Movement() 
     {
