@@ -6,6 +6,7 @@ using TMPro;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     public int yellowCoinNumber;
     public TextMeshProUGUI yellowCoinText;
 
+    public ProjectileBehaviour projectilePrefab;
+    public Transform launchOffset;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,9 +62,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         Grounded();
-        if (isGrounded) 
+        if (isGrounded)
         {
             animator.SetBool("Jumping", false);
         }
@@ -72,6 +76,12 @@ public class PlayerMovement : MonoBehaviour
         HeavyDrop();
         Run();
         //JumpBoost();
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ProjectileBehaviour newProjectile = Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
+            newProjectile.SetDirection(transform.localScale.x > 0); // Si el jugador mira a la derecha, va a la derecha
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -91,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         yellowCoinText.text = yellowCoinNumber.ToString();
     }*/
 
-    public void Movement() 
+    public void Movement()
     {
         x = Input.GetAxis("Horizontal");
 
@@ -101,20 +111,23 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", true);
         }
 
-        if (rb.velocity.x < 0) 
+        if (x < 0)
         {
-            transform.localScale = new Vector2(-1,1);
+            transform.localScale = new Vector2(-1, 1);
         }
 
-        else if (rb.velocity.x > 0)
+        else if (x > 0)
         {
-            transform.localScale = new Vector2(1, 1);
+            transform.localScale = new Vector2(1, 1);           
+
         }
 
-            rb.velocity = new Vector2(x * playerSpeed, rb.velocity.y);
+
+        rb.velocity = new Vector2(x * playerSpeed, rb.velocity.y);
 
         animator.SetFloat("X Velocity", rb.velocity.x);
     }
+
     
     public void Jump()
     {
