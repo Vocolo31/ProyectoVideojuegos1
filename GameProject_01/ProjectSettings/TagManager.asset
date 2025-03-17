@@ -9,6 +9,7 @@ TagManager:
   - Void
   - Button
   - Coin
+  - Water
   layers:
   - Default
   - TransparentFX

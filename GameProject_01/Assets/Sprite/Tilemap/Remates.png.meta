@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 04aee4dd41fde6540a9cbe874d9cd811
+guid: 56f3f885610147c40ac4f97187b754d0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Remates 1_0
+      name: Remates_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,19 +112,19 @@ TextureImporter:
       - - {x: -16, y: 16}
         - {x: -16, y: -16}
         - {x: 16, y: -16}
-        - {x: 16, y: 8}
-        - {x: 12, y: 8}
+        - {x: 16, y: 9}
+        - {x: 12, y: 9}
         - {x: 12, y: 16}
       tessellationDetail: 0
       bones: []
-      spriteID: 9dd7e4e7b5c1fad4096ffd205e6f5a88
-      internalID: -868628421
+      spriteID: f94e07da751ecc84885fc2638213398a
+      internalID: 975773284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Remates 1_1
+      name: Remates_1
       rect:
         serializedVersion: 2
         x: 32
@@ -135,21 +135,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 8}
-        - {x: -16, y: 8}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 872959a65cc72d54981f37789b97078b
-      internalID: -1360689975
+      spriteID: bbf20ea3fa3eec54c9ebb99d885bb31f
+      internalID: -457147500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Remates 1_2
+      name: Remates_2
       rect:
         serializedVersion: 2
         x: 64
@@ -161,23 +157,22 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -11, y: 16}
-        - {x: -11, y: 8}
-        - {x: -16, y: 8}
+      - - {x: -10.978638, y: 9}
+        - {x: -16, y: 9}
         - {x: -16, y: -16}
-        - {x: 11, y: -16}
-        - {x: 15, y: -7}
+        - {x: 16, y: -16}
         - {x: 16, y: 16}
+        - {x: -11, y: 16}
       tessellationDetail: 0
       bones: []
-      spriteID: 0e4be109f2ec2a747b955d002e771428
-      internalID: 2073841990
+      spriteID: 2726de329340edd4eab02305c362b223
+      internalID: -1787782503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Remates 1_3
+      name: Remates_3
       rect:
         serializedVersion: 2
         x: 0
@@ -188,23 +183,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: 5}
-        - {x: -9, y: -6}
-        - {x: -1, y: -12}
-        - {x: 16, y: -12}
-        - {x: 16, y: 16}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d0f035a2dffaf043a646b0223768bad
-      internalID: 2119356439
+      spriteID: a7e87f54677fa604cba873d25a5a1d93
+      internalID: -1894955891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Remates 1_4
+      name: Remates_4
       rect:
         serializedVersion: 2
         x: 32
@@ -215,21 +204,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -12}
-        - {x: 16, y: -12}
-        - {x: 16, y: 16}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fd1e06e42812e54c899dc88f233bc90
-      internalID: -1644728926
+      spriteID: 52b351e3d45dc504fbb3c51be9e15dbf
+      internalID: -1276258375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Remates 1_5
+      name: Remates_5
       rect:
         serializedVersion: 2
         x: 64
@@ -240,19 +225,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 12, y: 16}
-        - {x: -16, y: 16}
-        - {x: -16, y: -12}
-        - {x: 1, y: -12}
-        - {x: 5, y: -9}
-        - {x: 12, y: 0}
-        - {x: 14, y: 6}
-        - {x: 12, y: 12}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 950f9bae17b9762449fbc343843cc121
-      internalID: 858375160
+      spriteID: 618fe0b1ca0502548bf8629a038cdb56
+      internalID: -492670662
       vertices: []
       indices: 
       edges: []
@@ -268,12 +245,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Remates 1_0: -868628421
-      Remates 1_1: -1360689975
-      Remates 1_2: 2073841990
-      Remates 1_3: 2119356439
-      Remates 1_4: -1644728926
-      Remates 1_5: 858375160
+      Remates_0: 975773284
+      Remates_1: -457147500
+      Remates_2: -1787782503
+      Remates_3: -1894955891
+      Remates_4: -1276258375
+      Remates_5: -492670662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

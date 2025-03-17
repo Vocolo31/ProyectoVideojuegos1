@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     public ProjectileBehaviour projectilePrefab;
     public Transform launchOffset;
+    public float cooldownTime;
+    private bool canAttack = true;
+    public Animator heartAnimator;
 
 
     // Start is called before the first frame update
@@ -62,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Death();
         Grounded();
         if (isGrounded)
         {
@@ -77,10 +81,21 @@ public class PlayerMovement : MonoBehaviour
         Run();
         //JumpBoost();
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && canAttack == true)
         {
             ProjectileBehaviour newProjectile = Instantiate(projectilePrefab, launchOffset.position, transform.rotation);
             newProjectile.SetDirection(transform.localScale.x > 0); // Si el jugador mira a la derecha, va a la derecha
+            StartCoroutine(CooldownAttack(cooldownTime));
+        }
+    }
+
+    void Death()
+    {
+        int vida = heartAnimator.GetInteger("Life");
+
+        if (vida <= 0)
+        {
+            SceneManager.LoadScene("Main Menu");
         }
     }
 
@@ -264,4 +279,11 @@ public class PlayerMovement : MonoBehaviour
             JumpHeight = startJumpingHeight;
         }
     }*/
+
+    IEnumerator CooldownAttack(float time)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(time);
+        canAttack = true;
+    }
 }

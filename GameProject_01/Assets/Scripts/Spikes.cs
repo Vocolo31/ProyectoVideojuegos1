@@ -8,9 +8,9 @@ public class Spikes : MonoBehaviour
     public PlayerMovement playerMovement;
     public Animator animator;
     public Animator hearts;
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        PlayerMovement player = other.GetComponent<PlayerMovement>();
+        PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
 
         if (other.gameObject.CompareTag("Player"))
         {
