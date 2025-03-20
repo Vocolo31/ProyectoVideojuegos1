@@ -10,6 +10,7 @@ TagManager:
   - Button
   - Coin
   - Water
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

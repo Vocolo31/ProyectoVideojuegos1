@@ -4,6 +4,12 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     public float speed = 4.5f;
     private Vector2 direction;
+    public float lifeTime;
+
+    public void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
 
     public void SetDirection(bool isRight)
     {

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public float startJumpingHeight;
     public Animator animator;
     public BoxCollider2D boxCollider;
-    public PolygonCollider2D polygonCollider;
+    public CapsuleCollider2D capsuleCollider2D;
     public Spikes spikes;
 
     public int yellowCoinNumber;
@@ -45,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
     public float cooldownTime;
     private bool canAttack = true;
     public Animator heartAnimator;
+    public float runingSpeed;
+    public Animator checkpoint;
+    public Animator hearts;
 
 
     // Start is called before the first frame update
@@ -59,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         startJumpingHeight = JumpHeight;
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-        polygonCollider = GetComponent<PolygonCollider2D>();
+        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         //CoinCounter();
     }
 
@@ -87,11 +91,39 @@ public class PlayerMovement : MonoBehaviour
             newProjectile.SetDirection(transform.localScale.x > 0); // Si el jugador mira a la derecha, va a la derecha
             StartCoroutine(CooldownAttack(cooldownTime));
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+             float currentLife = hearts.GetFloat("Life");
+            hearts.SetFloat("Life", currentLife - 0.1f);
+            playerSpeed = startSpeed;
+            transform.position = initialPosition;
+        }
+
+        if (yellowCoinNumber.Equals(5))
+        {
+            float currentLife = hearts.GetFloat("Life");
+            if (currentLife <= 4)
+            {
+                hearts.SetFloat("Life", currentLife + 0.2f);
+                yellowCoinNumber = 0;
+            }
+            else if (currentLife == 5)
+            {
+                hearts.SetFloat("Life", currentLife + 0.1f);
+                yellowCoinNumber = 0;
+            }
+        }
+    }
+
+    void LifeByCoin()
+    {
+        
     }
 
     void Death()
     {
-        int vida = heartAnimator.GetInteger("Life");
+        float vida = heartAnimator.GetFloat("Life");
 
         if (vida <= 0)
         {
@@ -109,6 +141,15 @@ public class PlayerMovement : MonoBehaviour
 
             //CoinCounter();
         }
+
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            checkpoint.SetBool("Active", true);
+            initialPosition = transform.position;
+
+
+            //CoinCounter();
+        }
     }
 
     /*void CoinCounter()
@@ -120,7 +161,13 @@ public class PlayerMovement : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && IsSprinting)
+        {
+            RunningJump();
+            animator.SetBool("Jumping", true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !IsSprinting)
         {
             Jump();
             animator.SetBool("Jumping", true);
@@ -148,6 +195,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, JumpHeight);
         playerSpeed = startSpeed;
+        transform.localScale = initialScale;
+    }
+
+    public void RunningJump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, JumpHeight);
+        playerSpeed = startSpeed * runingSpeed;
         transform.localScale = initialScale;
     }
 
@@ -200,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("Crawled", true);
                 boxCollider.enabled = true;
-                polygonCollider.enabled = false;
+                capsuleCollider2D.enabled = false;
             }
         }
 
@@ -211,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("Crawled", false);
                 boxCollider.enabled = false;
-                polygonCollider.enabled = true;
+                capsuleCollider2D.enabled = true;
             }
         }
 
@@ -244,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
                 IsCrouched = true;
                 animator.SetBool("Crawled", true);
                 boxCollider.enabled = true;
-                polygonCollider.enabled = false;
+                capsuleCollider2D.enabled = false;
                 Debug.Log("Agachado 1");
             }
         }
@@ -253,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
             IsCrouched = false;
             animator.SetBool("Crawled", false);
             boxCollider.enabled = false;
-            polygonCollider.enabled = true;
+            capsuleCollider2D.enabled = true;
             Debug.Log("Agachado 2");
         }
     }

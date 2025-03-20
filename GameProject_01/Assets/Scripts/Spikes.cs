@@ -14,9 +14,9 @@ public class Spikes : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            int currentLife = hearts.GetInteger("Life");
+            float currentLife = hearts.GetFloat("Life");
             Respawn(player);
-            hearts.SetInteger("Life", currentLife - 1);
+            hearts.SetFloat("Life", currentLife - 0.1f);
             player.DeathCounter++;
             //TriesCounter();
             player.playerSpeed = player.startSpeed;
