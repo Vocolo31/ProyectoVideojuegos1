@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (vida <= 0)
         {
-            SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("Game Over");
         }
     }
 
